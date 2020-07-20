@@ -24,9 +24,12 @@ function getChoiceComp() {
  * @param {*} choiceComp the option the computer chose
  */
 function win(choiceUser, choiceComp) {
+    const choiceUserDiv = document.getElementById(choiceUser);
     scoreUser++;
     scoreUserSpan.innerHTML = scoreUser;
     resultDiv.innerHTML = `${choiceUser.charAt(0).toUpperCase()}${choiceUser.slice(1)} beats ${choiceComp}. You win!`;
+    choiceUserDiv.classList.add("green-glow");
+    setTimeout(() => choiceUserDiv.classList.remove("green-glow"), 300);
 }
 
 /**
@@ -35,9 +38,12 @@ function win(choiceUser, choiceComp) {
  * @param {*} choiceComp the option the user chose
  */
 function lose(choiceUser, choiceComp) {
+    const choiceUserDiv = document.getElementById(choiceUser);
     scoreComp++;
     scoreCompSpan.innerHTML = scoreComp;
     resultDiv.innerHTML = `${choiceComp.charAt(0).toUpperCase()}${choiceComp.slice(1)} beats ${choiceUser}. You lose.`;
+    choiceUserDiv.classList.add("red-glow");
+    setTimeout(() => choiceUserDiv.classList.remove("red-glow"), 300);
 }
 
 /**
@@ -46,7 +52,10 @@ function lose(choiceUser, choiceComp) {
  * @param {*} choiceComp the option the computer chose
  */
 function draw(choiceUser, choiceComp) {
+    const choiceUserDiv = document.getElementById(choiceUser);
     resultDiv.innerHTML = `${choiceComp.charAt(0).toUpperCase()}${choiceComp.slice(1)} equals ${choiceUser}. It's a draw.`;
+    choiceUserDiv.classList.add("grey-glow");
+    setTimeout(() => choiceUserDiv.classList.remove("grey-glow"), 300);
 }
 
 /**
@@ -77,15 +86,9 @@ function game(choiceUser) {
 function main() {
 
     // Adding Event Listeners
-    rockDiv.addEventListener("click", function() {
-        game("rock");
-    });
-    paperDiv.addEventListener("click", function() {
-        game("paper");
-    });
-    scissorDiv.addEventListener("click", function() {
-        game("scissor");
-    });
+    rockDiv.addEventListener("click", () => game("rock"));
+    paperDiv.addEventListener("click", () => game("paper"));
+    scissorDiv.addEventListener("click", () => game("scissor"));
 }
 
 main();
